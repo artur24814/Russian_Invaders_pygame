@@ -11,6 +11,12 @@ class Game:
         player_sprite = Player((screen_width / 2,screen_height),screen_width,5)
         self.player = pygame.sprite.GroupSingle(player_sprite)
 
+        #healt and score setup
+        self.lives = 3
+        self.live_surf = pygame.image.load('graphics/player_with_patron.png').convert_alpha()
+        self.live_surf = pygame.transform.scale(self.live_surf, (35, 45))
+        self.live_x_start_pos = screen_width - (self.live_surf.get_size()[0] * 2 + 20)
+
         #Obstacle setup
         self.shape = obstacle.shape
         self.block_size = 6
@@ -80,6 +86,52 @@ class Game:
             self.extra.add(Putin(random.choice(['right','left']),screen_width))
             self.extra_spawn_time = random.randint(400, 800)
 
+    def collision_checks(self):
+        # player gun
+        if self.player.sprite.guns:
+            for gun in self.player.sprite.guns:
+                #obstacle collision
+                if pygame.sprite.spritecollide(gun, self.blocks, True):
+                    gun.kill()
+                #rashists collisions
+                if pygame.sprite.spritecollide(gun, self.rashists, True):
+                    gun.kill()
+
+                #extra collisions
+                if pygame.sprite.spritecollide(gun, self.extra, True):
+                    gun.kill()
+
+        #rushists gun
+        if self.rashist_guns:
+            for gun in self.rashist_guns:
+                # obstacle collision
+                if pygame.sprite.spritecollide(gun, self.blocks, True):
+                    gun.kill()
+
+                # obstacle collision
+                if pygame.sprite.spritecollide(gun, self.player, False):
+                    gun.kill()
+                    self.lives -= 1
+                    if self.lives <= 0:
+                        pygame.quit()
+                        sys.exit()
+
+        #rushists
+        if self.rashists:
+            for rushist in self.rashists:
+                # obstacle collision
+                pygame.sprite.spritecollide(rushist, self.blocks, True)
+
+                if pygame.sprite.spritecollide(rushist, self.player, False):
+                    pygame.quit()
+                    sys.exit()
+
+    def display_lives(self):
+        for live in range(self.lives - 1):
+            x = self.live_x_start_pos + (live * self.live_surf.get_size()[0] + 10)
+            screen.blit(self.live_surf, (x,8))
+
+
     def run(self):
         self.player.sprite.guns.draw(screen)
         self.player.update()
@@ -88,6 +140,8 @@ class Game:
         self.rashist_guns.update()
         self.extra.update()
         self.extra_rashist_timer()
+        self.collision_checks()
+        self.display_lives()
 
         self.player.draw(screen)
         self.blocks.draw(screen)
