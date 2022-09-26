@@ -8,6 +8,10 @@ class Rashist(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (45, 65))
         self.rect = self.image.get_rect(topleft = (x,y))
 
+        if color == 'red': self.value = 100
+        elif color == 'drunk': self.value = 200
+        else: self.value = 300
+
     def update(self, direction):
         self.rect.x +=direction
 

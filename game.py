@@ -16,6 +16,8 @@ class Game:
         self.live_surf = pygame.image.load('graphics/player_with_patron.png').convert_alpha()
         self.live_surf = pygame.transform.scale(self.live_surf, (35, 45))
         self.live_x_start_pos = screen_width - (self.live_surf.get_size()[0] * 2 + 20)
+        self.score = 0
+        self.font = pygame.font.Font('font/Pixeltype.ttf',40)
 
         #Obstacle setup
         self.shape = obstacle.shape
@@ -94,11 +96,15 @@ class Game:
                 if pygame.sprite.spritecollide(gun, self.blocks, True):
                     gun.kill()
                 #rashists collisions
-                if pygame.sprite.spritecollide(gun, self.rashists, True):
+                rashists_hit = pygame.sprite.spritecollide(gun, self.rashists,True)
+                if rashists_hit:
+                    for rashist in rashists_hit:
+                        self.score += rashist.value
                     gun.kill()
 
                 #extra collisions
                 if pygame.sprite.spritecollide(gun, self.extra, True):
+                    self.score += 500
                     gun.kill()
 
         #rushists gun
@@ -131,6 +137,11 @@ class Game:
             x = self.live_x_start_pos + (live * self.live_surf.get_size()[0] + 10)
             screen.blit(self.live_surf, (x,8))
 
+    def display_score(self):
+        score_surf = self.font.render(f'score: {self.score}',False,'white')
+        score_rect = score_surf.get_rect(topleft=(10,10))
+        screen.blit(score_surf,score_rect)
+
 
     def run(self):
         self.player.sprite.guns.draw(screen)
@@ -141,13 +152,15 @@ class Game:
         self.extra.update()
         self.extra_rashist_timer()
         self.collision_checks()
-        self.display_lives()
 
         self.player.draw(screen)
         self.blocks.draw(screen)
         self.rashists.draw(screen)
         self.rashist_guns.draw(screen)
         self.extra.draw(screen)
+        self.display_lives()
+        self.display_score()
+
 
 
 if __name__ == '__main__':
