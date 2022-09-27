@@ -37,6 +37,17 @@ class Game:
         self.extra = pygame.sprite.GroupSingle()
         self.extra_spawn_time = random.randint(40,80)
 
+        #Audio
+        music = pygame.mixer.Sound('audio/bumboks_-_oj_u_luzi_chervona_kalina_pohililasja_(z2.fm).mp3')
+        music.set_volume(0.1)
+        music.play(loops=-1)
+        self.gun_sound = pygame.mixer.Sound('audio/Gunshot.mp3')
+        self.gun_sound.set_volume(0.13)
+        self.dead_rushist_sound = pygame.mixer.Sound('audio/sound_dead.mp3')
+        self.dead_rushist_sound.set_volume(0.23)
+        self.putin_sound = pygame.mixer.Sound('audio/sound_putin.mp3')
+        self.putin_sound.set_volume(0.3)
+
     def create_obstacle(self, x_start, y_start, offset_x):
         for row_index, row in enumerate(self.shape):
             for col_index, col in enumerate(row):
@@ -81,6 +92,7 @@ class Game:
             random_rashist = random.choice(self.rashists.sprites())
             gun_sprite = Gun(random_rashist.rect.center,6,screen_height)
             self.rashist_guns.add(gun_sprite)
+            self.gun_sound.play()
 
     def extra_rashist_timer(self):
         self.extra_spawn_time -= 1
@@ -101,11 +113,13 @@ class Game:
                     for rashist in rashists_hit:
                         self.score += rashist.value
                     gun.kill()
+                    self.dead_rushist_sound.play()
 
                 #extra collisions
                 if pygame.sprite.spritecollide(gun, self.extra, True):
                     self.score += 500
                     gun.kill()
+                    self.putin_sound.play()
 
         #rushists gun
         if self.rashist_guns:
@@ -142,6 +156,11 @@ class Game:
         score_rect = score_surf.get_rect(topleft=(10,10))
         screen.blit(score_surf,score_rect)
 
+    def vicitory(self):
+        if not self.rashists.sprites():
+            victory_surf = self.font.render("You won, SLAVA UKRAINI!", False, 'white')
+            victory_rect = victory_surf.get_rect(center=(screen_width/2, screen_height/2))
+            screen.blit(victory_surf,victory_rect)
 
     def run(self):
         self.player.sprite.guns.draw(screen)
@@ -160,6 +179,7 @@ class Game:
         self.extra.draw(screen)
         self.display_lives()
         self.display_score()
+        self.vicitory()
 
 
 

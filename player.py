@@ -14,6 +14,8 @@ class Player(pygame.sprite.Sprite):
         self.gun_cooldown = 600
 
         self.guns = pygame.sprite.Group()
+        self.gun_sound = pygame.mixer.Sound('audio/Gunshot.mp3')
+        self.gun_sound.set_volume(0.13)
 
     def get_input(self):
         keys = pygame.key.get_pressed()
@@ -27,6 +29,7 @@ class Player(pygame.sprite.Sprite):
             self.shoot_gun()
             self.ready = False
             self.gun_time = pygame.time.get_ticks()
+            self.gun_sound.play()
 
     def recharge(self):
         if not self.ready:
