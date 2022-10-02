@@ -161,6 +161,8 @@ class Game:
             victory_surf = self.font.render("You won, SLAVA UKRAINI!", False, 'white')
             victory_rect = victory_surf.get_rect(center=(screen_width/2, screen_height/2))
             screen.blit(victory_surf,victory_rect)
+            return True
+
 
     def run(self):
         self.player.sprite.guns.draw(screen)
@@ -190,6 +192,8 @@ if __name__ == '__main__':
     screen = pygame.display.set_mode((screen_width, screen_height))
     bg_img = pygame.image.load('graphics/bg_game.jpg')
     bg_img = pygame.transform.scale(bg_img, (screen_width, screen_height))
+    bg_img2 = pygame.image.load('graphics/Victory.jpg')
+    bg_img2 = pygame.transform.scale(bg_img2, (screen_width, screen_height))
     clock = pygame.time.Clock()
     game = Game()
 
@@ -205,6 +209,8 @@ if __name__ == '__main__':
                 game.rashists_shot()
 
         screen.blit(bg_img, (0,0))
+        if game.vicitory() == True:
+            screen.blit(bg_img2, (0, 0))
         game.run()
 
         pygame.display.flip()
