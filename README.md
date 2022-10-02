@@ -7,20 +7,20 @@
 <li><a href="#clone_project"><h3>Clone and Run a Django Project</h3></a>how run projects in your computer</li>
 </ul>
 <hr>
-<center>![graphics](russian_invanders.gif)<br></center>
 <h4>🇺🇦Ukraine was attacked by rushists invaders. Your job here isn't easy, you have to stop these pigs. But remember, the truth is on our side </h4>
 <center><img src="https://user-images.githubusercontent.com/97242088/193464228-1bd70d41-0987-4a52-beb6-8b60ffe49be3.png" width="500" alt="russian-invaders"></center><br>
 There are 4 different enemy:
 <ul>
-<li><img src="https://github.com/artur24814/Russian_Invaders_pygame/blob/main/graphics/rashist_red.png?raw=true" width="40" height="50" alt="russian-invaders2">
+<li><img src="https://user-images.githubusercontent.com/97242088/193469724-279b7a11-2e77-46ac-a0b3-7b55c020ae35.png" width="40" height="50" alt="russian-invaders2">
 <h3>Usual pigs</h3> for these pigs you have 100 pts </li>
-<li><img src="https://raw.githubusercontent.com/artur24814/Russian_Invaders_pygame/main/graphics/rashist_drunk.png?token=GHSAT0AAAAAABTUPPNC24V5PZ7N3JGROA7OYZZY5IQ" width="40" height="50" alt="russian-invaders2">
+<li><img src="https://user-images.githubusercontent.com/97242088/193469711-0811ce10-f04b-4cf1-81b7-c44befc986d6.png" width="40" height="50" alt="russian-invaders2">
 <h3>Drunk pigs</h3> for these pigs you get 100 points</li>
-<li><img src="https://raw.githubusercontent.com/artur24814/Russian_Invaders_pygame/main/graphics/rashist_general.png?token=GHSAT0AAAAAABTUPPNDSESEGZIIIDUMEAMSYZZY67Q" width="40" height="50" alt="russian-invaders2">
+<li><img src="https://user-images.githubusercontent.com/97242088/193469717-3ff0bb3b-73aa-4635-90bb-d49f59789f8b.png" width="40" height="50" alt="russian-invaders2">
 <h3>Pigs generals</h3> these pigs will give a total of 300 points</li>
-<li><img src="https://raw.githubusercontent.com/artur24814/Russian_Invaders_pygame/main/graphics/rashist_putin.png?token=GHSAT0AAAAAABTUPPNCWUNXYXNXOT6UMB54YZZY7QQ" width="40" height="50" alt="russian-invaders2">
+<li><img src="https://user-images.githubusercontent.com/97242088/193469719-6b4817d7-63d6-430a-a0d7-d101eae0a037.png" width="40" height="50" alt="russian-invaders2">
 And the biggest and smelly pig - <small>p</small>utin, for him- 500 points</li>
 </ul>
+
 
 
 <center><img src="https://user-images.githubusercontent.com/97242088/193464212-881548cc-8dd5-4697-8b4f-b2d22525b9d7.png" width="500" alt="russian-invaders2"></center><br>
